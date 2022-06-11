@@ -1,10 +1,13 @@
+# Need a Catefories command
+# 
+
 # This program prints Hello, world!
 import discord
 # import datetime
 # import re
 # import numpy as np
 # import pandas as pd
-# import requests 
+import requests 
 # import json
 # import sys
 
@@ -24,9 +27,6 @@ f = open('config.json')
 # a dictionary
 data = json.load(f)
 
-for value in data['prefix']:
-    print(value)
-
 bot = commands.Bot(command_prefix = data['prefix'], help_command=None)
 
 #Event to show that bot is ready to use.
@@ -39,45 +39,21 @@ async def on_ready():
 async def ping(ctx):
 	await ctx.send(f'Pong! Latency: {round(bot.latency * 1000)}ms')
 
-
 #Command for printing the standings of a league and season.
-# @bot.command()
-# async def standings(ctx, league, season):
+@bot.command()
+async def category(ctx, category):
 
-	#Convert input league into correct format for url
-	# if league == "EPL":
-		# league = "eng.1"
-	# elif league == "Bundesliga":
-		# league = "ger.1"
-	# elif league == "SerieA":
-		# league = "ita.1"
-	# elif league == "LaLiga":
-		# league = "esp.1"
-	# elif league == "Ligue1":
-		# league = "fra.1"
-	# elif league == "Eredivisie":
-		# league = "ned.1"
-	# elif league == "EFL":
-		# league = "eng.2"
-	# elif league == "MLS":
-		# league = "usa.1"
-	# elif league == "LigaMX":
-		# league = "mex.1"
-	# elif league == "PrimeiraLiga":
-		# league = "por.1"
-	# elif league == "RPL":
-		# league = "rus.1"
-	# elif league == "ScottishPremiership":
-		# league = "sco.1"
-	# elif league == "CampeonatoBrasileiro":
-		# league = "bra.1"
-	# elif league == "SuperLig":
-		# league = "tur.1"
-	    
-	# if league not in leagues :
-		# await ctx.send("Invalid input, please pick from the list of leagues.")
-		# await ctx.send(showleagues)
-		# return
+    URL = "https://www.randomtriviagenerator.com/#/category/"
+    page = requests.get(URL)
+
+    print(page.text)
+    
+    categories = ["SCIENCE", "GENERAL", "ARTS", "ENTERTAINMENT", "GEOGRAPHY"]
+    
+    if category.upper() not in categories :
+        await ctx.send("Invalid input, please pick from the list of categories.")
+        await ctx.send(categories)
+        return
 	# else:
 		#build the url
 		# base_url = 'https://www.espn.com/soccer/standings/_/league/' + league
@@ -157,3 +133,12 @@ bot.run(data['token'])
 
 # Closing file
 f.close()
+
+# Useful git commands
+# 1. git status --This is used to view if you need to add/commit/push files to the repository.
+# 2. git add --This is needed to add modified files and have them ready to be committed.
+# 3. git commit -m "INSERT YOUR MESSAGE HERE" --This is used to staged your changes and the message needs to be useful.
+# 4. git push --set-upstream origin INSERT-BRANCH-NAME <--IF FIRST TIME EVER ON BRANCH otherwrise --> git push
+# 5. git log --See previous commits
+# 6. git checkout INSERT-BRANCH-NAME --USED TO GO TO A DIFFERENT BRANCH
+# 7. git branch --See your current branch/other branches that exist
