@@ -23,11 +23,9 @@ async def ping(ctx):
 
 @bot.command()
 async def help(ctx):
-	await ctx.send(f'Usage: !standings [league] [season]')
-	await ctx.send(f'Here are a list of supported leagues:')
-	await ctx.send(showleagues)
-	await ctx.send(f'Here are a list of supported seasons:')
-	await ctx.send(seasons)
+	await ctx.send(f'Please input a valid stock ticker')
+	await ctx.send(f'Usage: !stock [stock ticker]')
+	await ctx.send(f'Example: !stock SNAP')
 
 # Webscrape and output the stock information.
 @bot.command()
